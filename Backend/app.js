@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require("dotenv").config()
 
-var indexRouter = require('./routes/index');
+var productRouter = require('./routes/product');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/product', productRouter);
 app.use('/users', usersRouter);
 app.use("/api", apiRouter);
 
