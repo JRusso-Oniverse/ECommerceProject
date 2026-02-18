@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p list</title>
+    <title>Products List</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -16,10 +19,10 @@
 
         <div class="containerFlex">
 
-    <div id="prodtit">
-        <strong>PRODUCTS</strong>
-    </div>
-    <br><br>
+            <div id="prodtit">
+                <strong>PRODUCTS</strong>
+            </div>
+            <br><br>
             <div class="containerGrid">
 
                 <div class="elmenu">
@@ -27,43 +30,18 @@
                 </div>
 
                 <div class="containerFlex1">
-                    <div class="el">
-                        <img src="imgprova.png" alt="prod1" id="image">
-                        <br>
-                        <button class="b1">discover1</button>
+
+                    <div class="ell">
+
                     </div>
 
-                    <div class="el">
-                        <img src="imgprova.png" alt="prod1" id="image">
-                        <br>
-                        <button class="b1">discover2</button>
-                    </div>
-                    <div class="el">
-                        <img src="imgprova.png" alt="prod1" id="image">
-                        <br>
-                        <button class="b1">discover3</button>
-                    </div>
-
-                    <div class="el">
-                        <img src="imgprova.png" alt="prod1" id="image">
-                        <br>
-                        <button class="b1">discover4</button>
-                    </div>
-
-
-                    <div class="el">
-                        <img src="imgprova.png" alt="prod1" id="image">
-                        <br>
-                        <button class="b1">discover5</button>
-                    </div>
                 </div>
 
 
-                <div class="elfoot"> this is footer.
+                <div class="plp-foot">
                 </div>
             </div>
 
-            <div class="boh1">fuori grid, dentro flex</div>
 
 
 
@@ -73,50 +51,50 @@
 
     <style>
         body {
-            background-color: rgb(201, 128, 179);
+            background-color: rgb(255, 255, 255);
         }
 
-        .boh1{
-            background-color: blanchedalmond;
-        }
 
         .containerFlex1 {
             grid-area: main;
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
         }
 
-        .elfoot {
+        .plp-foot {
             grid-area: footer;
             text-align: center;
             font-size: 32px;
             font-family: Century Gothic;
-            background-color: brown;
+            background-color: #333333;
             color: blanchedalmond;
+            height: 2rem;
         }
 
         .elmenu {
             grid-area: menu;
-            background-color: aqua;
-            color: black;
-            text-align: right;
+            background-color: #333333;
+            color: white;
+            text-align: center;
             font-size: 32px;
             font-family: Century Gothic;
             height: auto;
             width: auto;
+            border-radius: 1.5rem;
         }
 
-        .el {
-            /* background-color: rgb(168, 168, 168); */
-            /* text-align: center; */
-            font-size: 32px;
+        .ell {
+            text-align: center;
+            font-size: 18px;
             font-family: Century Gothic;
             height: auto;
             width: auto;
             flex-basis: 150px;
-            /* flex-grow: 1; */
+            color: #333333;
+            border-radius: 1.3rem;
         }
 
         .b1 {
@@ -150,11 +128,71 @@
 
         #prodtit {
             text-align: center;
-            font-size: 32px;
-            color: rgb(20, 20, 20);
+            font-size: 48px;
+            color: #333333;
             font-family: Century Gothic;
         }
     </style>
+
+
+
+    <script>
+
+        const mock_pl_data = {
+            pl: [
+                {
+                    id: 23,
+                    title: "Calzini",
+                    price: 2.99,
+                },
+
+                {
+                    id: 45,
+                    title: "Cappello",
+                    price: 12.99,
+                },
+
+                {
+                    id: 56,
+                    title: "T-Shirt",
+                    price: 5.99,
+                }
+            ]
+        }
+
+        function plist(data) {
+            products_list(data);
+        }
+
+        plist(mock_pl_data);
+
+        function products_list(data) {
+            mock_pl_data.pl.forEach(product => {
+                let cardEl = document.createElement("div");
+
+                cardEl.innerHTML = `
+                    <img src="./cdn/images/product-${product.id}.png"/>
+                    <div>
+                        <h2>${product.title}</h2>
+                        <p><span class="cc-price-tag">${product.price}</span> /pc</p>
+                        <div>
+                            <button>&lt;</button>
+                            <p>${product.count}</p>
+                            <button>&gt;</button>   
+                        </div>
+                    </div>
+                `;
+
+                cardEl.dataset.pid = product.id.toString();
+
+                document.querySelector("div.ell").appendChild(cardEl);
+
+            });
+        }
+        /**
+         *@param {{products: {id: number, title: string, price: number, count: number}[]}} data
+         */
+    </script>
 </body>
 
 </html>
