@@ -1,15 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>p list</title>
 </head>
-<body>
-    <h1>
-        title
-    </h1>
 
-    
+<body>
+
+
+
+    <div id="products">
+
+
+        <div class="containerFlex">
+
+    <div id="prodtit">
+        <strong>PRODUCTS</strong>
+    </div>
+    <br><br>
+            <div class="containerGrid">
+
+                <div class="elmenu">
+                    this is menu
+                </div>
+
+                <div class="containerFlex1">
+                    <div class="el">
+                        <img src="imgprova.png" alt="prod1" id="image">
+                        <br>
+                        <button class="b1">discover1</button>
+                    </div>
+
+                    <div class="el">
+                        <img src="imgprova.png" alt="prod1" id="image">
+                        <br>
+                        <button class="b1">discover2</button>
+                    </div>
+                    <div class="el">
+                        <img src="imgprova.png" alt="prod1" id="image">
+                        <br>
+                        <button class="b1">discover3</button>
+                    </div>
+
+                    <div class="el">
+                        <img src="imgprova.png" alt="prod1" id="image">
+                        <br>
+                        <button class="b1">discover4</button>
+                    </div>
+
+
+                    <div class="el">
+                        <img src="imgprova.png" alt="prod1" id="image">
+                        <br>
+                        <button class="b1">discover5</button>
+                    </div>
+                </div>
+
+
+                <div class="elfoot"> this is footer.
+                </div>
+            </div>
+
+            <div class="boh1">fuori grid, dentro flex</div>
+
+
+
+        </div>
+
+    </div>
+
+    <style>
+        body {
+            background-color: rgb(201, 128, 179);
+        }
+
+        .boh1{
+            background-color: blanchedalmond;
+        }
+
+        .containerFlex1 {
+            grid-area: main;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .elfoot {
+            grid-area: footer;
+            text-align: center;
+            font-size: 32px;
+            font-family: Century Gothic;
+            background-color: brown;
+            color: blanchedalmond;
+        }
+
+        .elmenu {
+            grid-area: menu;
+            background-color: aqua;
+            color: black;
+            text-align: right;
+            font-size: 32px;
+            font-family: Century Gothic;
+            height: auto;
+            width: auto;
+        }
+
+        .el {
+            /* background-color: rgb(168, 168, 168); */
+            /* text-align: center; */
+            font-size: 32px;
+            font-family: Century Gothic;
+            height: auto;
+            width: auto;
+            flex-basis: 150px;
+            /* flex-grow: 1; */
+        }
+
+        .b1 {
+            text-align: center;
+            font-size: 18px;
+            font-family: Century Gothic;
+        }
+
+        .containerFlex {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            /* text-align: center; */
+        }
+
+        .containerGrid {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header'
+                'menu main main main main main'
+                'footer footer footer footer footer footer';
+        }
+
+        #image {
+            background-color: rgb(201, 128, 179);
+            color: rgb(30, 30, 30);
+            width: 250px;
+            height: 350px;
+            font-family: Century Gothic;
+        }
+
+        #prodtit {
+            text-align: center;
+            font-size: 32px;
+            color: rgb(20, 20, 20);
+            font-family: Century Gothic;
+        }
+    </style>
 </body>
+
 </html>
