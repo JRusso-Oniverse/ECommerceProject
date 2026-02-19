@@ -26,7 +26,12 @@
             <div class="containerGrid">
 
                 <div class="elmenu">
-                    this is menu
+                    menù layout
+                    <div class="container-flex-menu">
+                        <div class="element-container-flex-menu">
+                            aaa
+                        </div>
+                    </div>
                 </div>
 
                 <div class="containerFlex1">
@@ -72,6 +77,10 @@
             background-color: #333333;
             color: blanchedalmond;
             height: 2rem;
+            border-bottom-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            
+
         }
 
         .elmenu {
@@ -83,7 +92,8 @@
             font-family: Century Gothic;
             height: auto;
             width: auto;
-            border-radius: 1.5rem;
+
+            border-top-right-radius: 1.5rem;
         }
 
         .ell {
@@ -131,6 +141,11 @@
             font-size: 48px;
             color: #333333;
             font-family: Century Gothic;
+        }
+
+        .container-flex-menu {
+            display: flex;
+            flex-direction: column;
         }
     </style>
 
