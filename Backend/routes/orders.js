@@ -6,6 +6,8 @@ var router = express.Router();
 const supabase = supa.createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 
+
+
 //get * orders
 router.get('/', async function (req, res, next) {
 	const { data, error } = await supabase;
@@ -17,18 +19,18 @@ router.get('/', async function (req, res, next) {
 		if (error !== null)
 			res.status(500);
 
-		res.json(data);
+		res.send(data);
 
 	} else {
 		const { data, error } = await supabase
 			.from('orders')
 			.select()
-			.eq(req.params.id,'id');
+			.eq(req.params.id, 'id');
 
 		if (error !== null)
 			res.status(500);
 
-		res.json(data);
+		res.send(data);
 	}
 });
 
@@ -48,7 +50,7 @@ router.get('/:id', async function (req, res, next) {
 	if (data.length === 0)
 		res.status(404);
 
-	res.json(data);
+	res.send(data);
 });
 
 
@@ -66,10 +68,50 @@ router.get('/:id', async function (req, res, next) {
 	if (data.length === 0)
 		res.status(404);
 
-	res.json(data[0]);
+	res.send(data[0]);
 });
 
 
+
+//ORDERS objs: id(PK), user_id(FK), product_id(FK), count
+
+
+
+//create new order
+router.post('/orders', async function (req, res, next) {
+
+	const orderPayload = new Order({
+		id: req.body.id,
+		user_id: req.users.id,
+		product_id: req.body.product_id,
+		count: req.body.count,
+	});
+
+	const new_order = await orderPayload.save();
+	res.status(201).send({
+		message: "new order created!",
+		data: new_order
+	});
+
+	console.error("err");
+});
+
+
+//delete order
+router.delete('/', async function (req, res, next) {
+
+	const del_order = await Order.findOne({
+		id: req.params.id
+	});
+
+	if (del_order) {
+		const deleted_order = await del_order.remove();
+		res.send(deleted_order);
+	} else {
+		res.status(404).send("order not found.")
+	}
+	
+});
 
 
 module.exports = router;
