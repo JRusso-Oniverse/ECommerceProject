@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    min-width: 100vw;
+    align-content: center;
+    flex-direction: column;
+}
+
+.mainButton {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttonNew {
+    align-self: center;
+    justify-items: space-between;
+    flex-wrap: wrap;
+}
+
+.formAdd{
+    border: solid rgb(0, 0, 0) 1px;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+.hiddenElements {
+    display: none;
+}
