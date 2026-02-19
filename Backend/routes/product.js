@@ -5,6 +5,41 @@ var router = express.Router();
 
 const supabase = supa.createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
+// POST /product => 201
+router.post('/', async function (req, res, next) {
+	const newProduct = {
+		name: req.body.name,
+		price: req.body.price
+	};
+	if (newProduct.name === undefined) {
+		res
+			.status(400)
+			.json({"errorMessage": "Missing product name"});
+	}
+	if (newProduct.price === undefined) {
+		res
+			.status(400)
+			.json({"errorMessage": "Missing product price"});
+	}
+	const { data, error } = await supabase
+		.from('products')
+		.insert(newProduct)
+		.select();
+	if (error !== null) {
+		res
+			.status(500)
+			.json(
+				{
+					"errorMessage": "Server error",
+					"details": error.details
+				}
+			);
+	}
+	res
+		.status(201)
+		.location(`/product/${data[0].id}`)
+		.json(data);
+});
 
 // GET /product => Product[]
 router.get('/', async function (req, res, next) {
