@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/core.css">
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
     <title>Document</title>
     <link rel="stylesheet" href="styles/admin.css">
 </head>
@@ -20,36 +21,94 @@
     <main>
         <div class="mainButton">
             <div>
-                <button>
-                    New Product
+                <button id="buttonStart">
+                    Delete Product
                 </button>
             </div>
             <br>
             <div>
-                <button>
-                    Delete Product
-                </button>
-            </div>
-            <div>
-                <button>
-                    Upload Product
+                <button id="buttonFormNewProduct">
+                    New Product
                 </button>
             </div>
         </div>
         <br>
         <br>
         <div>
-            <form class="formAdd">
+            <form class="formAdd hiddenElements" id="formNewProduct" action="/api/product">
                 <input type="text" placeholder="Inserisci Nome del Prodotto">
-                <br>
-                <br>
                 <input type="text" placeholder="Inserisci il prezzo del prodotto">
+                <br>
+                <br>
+                <button id="buttonSubmitNewProduct">
+                    Submit
+                </button>
             </form>
         </div>
+        <div>
+            <ul id="productListElements">
+            </ul>
+        </div>
+
     </main>
     <footer>
 
     </footer>
+
+    <script>
+
+        var buttonSubmitNewProduct = document.getElementById("buttonSubmitNewProduct");
+        var buttonFormNewProduct = document.getElementById("buttonFormNewProduct");
+        var formNewProduct = document.getElementById("formNewProduct");
+        var buttonStart = document.getElementById("buttonStart");
+        var userListElements = document.getElementById("productListElements")
+
+        function usersList() {
+
+            $.ajax({
+                url: `http://localhost:3000/api/product/`,
+                dataType: "json",
+                success: function (response) {
+                    $.each(response, function (index, value) {
+
+                        $("ul#productListElements").append(`
+                        <li>
+                            <p>${value.id}</p>
+                            <p>${value.name}</p>
+                            <p>${value.price}</p>
+                            <button>
+                                ${"Delete"}
+                            </button>
+                        </li>
+                        `)
+
+                    });
+
+                    buttonStart.classList.add("hiddenElements");
+
+                },
+                error: function (error) {
+                    console.error("Errore:", error);
+                    $("#result").html("Si è verificato un errore.")
+                }
+            })
+        }
+
+        buttonStart.addEventListener("click", function () {
+            var res = usersList()
+        })
+
+        function formMagic(){
+             buttonFormNewProduct.classList.add("hiddenElements");
+             formNewProduct.classList.remove("hiddenElements");
+        }
+
+        buttonFormNewProduct.addEventListener("click", function (){
+            var res = formMagic ()
+        })
+
+    </script>
+
 </body>
 
 </html>

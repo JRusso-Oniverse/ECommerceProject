@@ -1,0 +1,51 @@
+main {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "cart-list cart-summary"
+}
+
+#containflex {
+    justify-content: center;
+    background-color: rgb(201, 128, 179);
+    color: rgb(30, 30, 30);
+    flex-wrap: wrap;
+    font-family: Century Gothic;
+    display: flex;
+    flex-direction: row;
+}
+
+#product {
+    display: flex;
+    flex-direction: row;
+    color: rgb(30, 30, 30);
+    font-family: Century Gothic;
+}
+
+#image {
+    background-color: rgb(201, 128, 179);
+    color: rgb(30, 30, 30);
+    width: 300px;
+    height: 300px;
+    font-family: Century Gothic;
+}
+
+#description {
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+
+
+#flexbutt {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+#prodtit {
+    text-align: center;
+    font-size: 32px;
+    color: rgb(255, 232, 188);
+    font-family: Century Gothic;
+}

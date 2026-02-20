@@ -10,119 +10,55 @@
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"
         integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 
+    <title>Details</title>
+    <link rel="stylesheet" href="styles/pdp.css">
 </head>
 
 <body>
+    <header></header>
 
-    <div id="prodtit">
-        <strong>PRODUCT</strong>
-    </div>
-    <br><br><br><br>
+    <main>
+        <h1>Prodotto</h1>
 
-    <div id="product">
+        <div id="product">
 
-        <img src="imgprova.png" alt="prod1" id="image">
+            <img src="imgprova.png" alt="prod1" id="image">
 
-        <div id="containflex">
+            <div id="containflex">
 
-            <div id="description">
-                <strong>DESCRIPTION</strong>
-                <br>
-                <br>
-                <br>
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
-                hahahahahahahahahahahahaha
+                <div id="description">
+                    <strong>DESCRIPTION</strong>
+                    <br>
+                    <br>
+                    <br>
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                    hahahahahahahahahahahahaha
+                </div>
+
+                <div id="flexbutt">
+                    <button id="goback">
+                        GOBACK B
+                    </button>
+                    <button id="addtocart">
+                        CART B
+                    </button>
+                </div>
             </div>
-
-            <div id="flexbutt">
-                <button id="goback">
-                    GOBACK B
-                </button>
-                <button id="addtocart">
-                    CART B
-                </button>
-            </div>
-
         </div>
+    </main>
 
-    </div>
-
-
-    <style>
-        body {
-            background-color: rgb(158, 103, 142);
-
-        }
-
-        #containflex {
-            justify-content: center;
-            background-color: rgb(201, 128, 179);
-            color: rgb(30, 30, 30);
-            flex-wrap: wrap;
-            font-family: Century Gothic;
-            display: flex;
-            flex-direction: row;
-        }
-
-        #product {
-            display: flex;
-            flex-direction: column;
-            color: rgb(30, 30, 30);
-            font-family: Century Gothic;
-        }
-
-        #image {
-            background-color: rgb(201, 128, 179);
-            color: rgb(30, 30, 30);
-            width: 300px;
-            height: 300px;
-            font-family: Century Gothic;
-        }
-
-        #description {
-            flex-wrap: wrap;
-            text-align: center;
-        }
-
-
-
-        #flexbutt {
-            display: flex;
-            flex-direction: row;
-            text-align: center;
-        }
-
-        #prodtit {
-            text-align: center;
-            font-size: 32px;
-            color: rgb(255, 232, 188);
-            font-family: Century Gothic;
-        }
-    </style>
-
-    <script>
-
-        // function pdp_add_to_cart() {
-        //     $.ajax({
-        //         url: "http://localhost",
-        //         dataType: "json",
-        //         success:
-
-        //     })
-        // }
-    </script>
+    <footer></footer>
 </body>
-
 </html>
