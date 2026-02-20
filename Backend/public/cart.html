@@ -8,21 +8,6 @@
 
     <title>Shopping Bag</title>
     <link rel="stylesheet" href="styles/cart.css">
-    
-
-    <style>
-        button {
-            height: 2rem;
-            border: none;
-            border-radius: 1.5rem;
-        }
-
-        .cc-price-tag {
-            &::after {
-                content: "€";
-            }
-        }
-    </style>
 </head>
 <body>
     <header></header>
@@ -63,82 +48,108 @@
     </footer>
     
     <script>
-        const mock_data = {
-            products: [
-                {
-                    id: 23,
-                    title: "Calzini",
-                    price: 2.99,
-                    count: 2
-                },
-                {
-                    id: 45,
-                    title: "Cappello",
-                    price: 12.99,
-                    count: 1
-                },
-                {
-                    id: 56,
-                    title: "T-Shirt",
-                    price: 5.99,
-                    count: 5
-                }
-            ]
-        }
-
-        function updateCart(data) {
-            renderCartList(data);
-            renderPricingInfo(data);
-        };
-
-        function renderCartList(data) {
-            mock_data.products.forEach(product => {
-                let cardElement = document.createElement("div");
-
-                cardElement.innerHTML = `
-                    <img src="./cdn/images/product-${product.id}.png"/>
-                    <div>
-                        <h2>${product.title}</h2>
-                        <p><span class="cc-price-tag">${product.price}</span> /pc</p>
+        /**
+         * @param {{id: number, name: string, price: number}[]} products
+         * @param {{id: number, count: number}[]} cart
+         */
+        function renderCartList(products, cart) {
+            $("div.cc-product-list").empty();
+            cart.forEach(cartItem => {
+                const product = products.find(p => p.id == cartItem.id);
+                $("div.cc-product-list").append(`
+                    <div data-product-id="${product.id}">
+                        <img src="./cdn/images/product-${product.id}.png"/>
                         <div>
-                            <button>&lt;</button>
-                            <p>${product.count}</p>
-                            <button>&gt;</button>   
+                            <h2>${product.name}</h2>
+                            <p><span class="cc-price-tag">${product.price}</span> /pc</p>
+                            <div>
+                                <button>&lt;</button>
+                                <p>${cartItem.count}</p>
+                                <button>&gt;</button>   
+                            </div>
                         </div>
                     </div>
-                `;
-
-                cardElement.dataset.productId = product.id.toString();
-
-                document.querySelector("div.cc-product-list").appendChild(cardElement);
+                `);
             });
         }
 
         /**
-         *@param {{products: {id: number, title: string, price: number, count: number}[]}} data
+         * @param {{id: number, name: string, price: number}[]} products
+         * @param {{id: number, count: number}[]} cart
          */
-        function renderPricingInfo(data) {
+        function renderCartSummary(products, cart) {
             const shippingPrice = 2.49;
+            
+            const cartTotal = cart
+                .map(cartItem => {
+                    const product = products.find(p => p.id == cartItem.id);
+                    return product.price * cartItem.count
+                })
+                .reduce((cartTotal, totalProductCost) => cartTotal += totalProductCost, 0);
 
-            let cartPrice = data.products.map(cartItem => cartItem.price * cartItem.count).reduce((cartTotal, cartItemPrice) => cartTotal + cartItemPrice);
 
-            document.getElementById("cart-total").innerText = cartPrice;
-            document.getElementById("shipping-total").innerText = shippingPrice;
-            document.getElementById("payment-total").innerText = (cartPrice + shippingPrice).toFixed(2);
-            document.getElementById("payment-button").innerText = (cartPrice + shippingPrice).toFixed(2) + "€ - Procedi all'acquisto";
+            $("#cart-total").text(cartTotal);
+            $("#shipping-total").text(shippingPrice);
+            $("#payment-total").text((cartTotal + shippingPrice).toFixed(2));
+            $("#payment-button").text((cartTotal + shippingPrice).toFixed(2) + "€ - Procedi all'acquisto");
         }
 
-        updateCart(mock_data);
+        /**
+         * @param {{id: number, name: string, price: number}[]} products
+         * @param {{id: number, count: number}[]} cart
+         */
+        function renderCart(products, cart) {
+            renderCartList(products, cart);
+            renderCartSummary(products, cart);
+        }
+
+        /**
+         *@returns {{id: number, name: string, price: number}[]}
+         */
+        async function getAllProducts() {
+            const response = await fetch("./api/product");
+            if (response.status !== 200) {
+                console.error("Cannot fetch product data. Status ", response.status);
+                return [];
+            }
+            return await response.json();
+        }
 
         /**
          *@returns {{id: number, count: number}[]}
          */
-        function getCartFromLocalStorage() {
+        function loadCartFromLocalStorage() {
             const cartData = window.localStorage.getItem("cart");
             if (cartData === null) return [];
             return JSON.parse(cartData);
         }
-        
+
+        function onBuyButtonPressed() {
+            const cart = loadCartFromLocalStorage();
+            cart.forEach(async cartItem => {
+                const response = fetch("./api/order",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "user_id": 2,
+                            "product_id": cartItem.id,
+                            "count": cartItem.id
+                        })
+                    }
+                );
+            })
+        }
+
+        $(async function() {
+            const products = await getAllProducts();
+            const cart = loadCartFromLocalStorage();
+            renderCart(products, cart);
+
+            $("#payment-button").on("click", onBuyButtonPressed);
+        });
     </script>
 </body>
 </html>
