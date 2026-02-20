@@ -5,152 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/core.css">
-    <title>Products List</title>
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
-        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 
+    <title>Shopping Bag</title>
+    <link rel="stylesheet" href="styles/plp.css">
 </head>
-
 <body>
+    <header></header>
 
-
-
-    <div id="products">
-
-
-        <div class="containerFlex">
-
-            <div id="prodtit">
-                <strong>PRODUCTS</strong>
-            </div>
-            <br><br>
-            <div class="containerGrid">
-
-                <div class="elmenu">
-                    menù layout
-                    <div class="container-flex-menu">
-                        <div class="element-container-flex-menu">
-                            aaa
+    <main>
+        <div id="products">
+            <div class="containerFlex">
+                <div id="prodtit">
+                    <strong>PRODUCTS</strong>
+                </div>
+                <br><br>
+                <div class="containerGrid">
+                    <div class="elmenu">
+                        menù layout
+                        <div class="container-flex-menu">
+                            <div class="element-container-flex-menu">
+                                aaa
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="containerFlex1">
-
-                    <div class="ell">
-
+                    <div class="containerFlex1">
+                        <div class="ell">
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="plp-foot">
+                    <div class="plp-foot">
+                    </div>
                 </div>
             </div>
-
-
-
-
         </div>
+    </main>
 
-    </div>
-
-    <style>
-        body {
-            background-color: rgb(255, 255, 255);
-        }
-
-
-        .containerFlex1 {
-            grid-area: main;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .plp-foot {
-            grid-area: footer;
-            text-align: center;
-            font-size: 32px;
-            font-family: Century Gothic;
-            background-color: #333333;
-            color: blanchedalmond;
-            height: 2rem;
-            border-bottom-left-radius: 1.5rem;
-            border-top-right-radius: 1.5rem;
-            
-
-        }
-
-        .elmenu {
-            grid-area: menu;
-            background-color: #333333;
-            color: white;
-            text-align: center;
-            font-size: 32px;
-            font-family: Century Gothic;
-            height: auto;
-            width: auto;
-
-            border-top-right-radius: 1.5rem;
-        }
-
-        .ell {
-            text-align: center;
-            font-size: 18px;
-            font-family: Century Gothic;
-            height: auto;
-            width: auto;
-            flex-basis: 150px;
-            color: #333333;
-            border-radius: 1.3rem;
-        }
-
-        .b1 {
-            text-align: center;
-            font-size: 18px;
-            font-family: Century Gothic;
-        }
-
-        .containerFlex {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            /* text-align: center; */
-        }
-
-        .containerGrid {
-            display: grid;
-            grid-template-areas:
-                'header header header header header header'
-                'menu main main main main main'
-                'footer footer footer footer footer footer';
-        }
-
-        #image {
-            background-color: rgb(201, 128, 179);
-            color: rgb(30, 30, 30);
-            width: 250px;
-            height: 350px;
-            font-family: Century Gothic;
-        }
-
-        #prodtit {
-            text-align: center;
-            font-size: 48px;
-            color: #333333;
-            font-family: Century Gothic;
-        }
-
-        .container-flex-menu {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
-
-
+    <footer></footer>
 
     <script>
 
