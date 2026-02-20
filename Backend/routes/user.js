@@ -98,17 +98,14 @@ router.put('/:id', async function (req, res) {
 // DELETE /user/{id} => User
 router.delete('/:id', async function (req, res) {
 
-	const delUser = await findOne({
-		id: req.params.id
-	});
+	await supabase
+		.from('users')
+		.delete()
+		.eq("id", req.params.id);
 
-	if (delUser) {
-		const deleted_user = await delUser.remove();
-		res.send(deleted_user);
-	} else {
-		res.status(400).send("user not found.")
-	}
-	
+	res
+		.status(204)
+		.send();
 });
 
 module.exports = router;

@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    grid-template-areas:
+        "header header header"
+        ". main ."
+        "footer footer footer";
+    border: solid red 3px;
+}
+
+.headerECommerce {
+    grid-area: header;
+    background-color: white;
+    border: solid black 1px;
+    /* position: fixed; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.title {
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cart {
+
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+}
+
+.product {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.mainECommerce {
+    grid-area: main;
+}
+
+.footerECommercee {
+    grid-area: footer;
+    border: solid darkblue 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.carousels {
+    grid-area: firstElement;
+    min-width: 20vw;
+    min-height: 20vh;
+    padding: 15px;
+    display: flex;
+    gap: 2vw;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    anchor-name: --my-carousel;
+}
+
+ul::scroll-button(*) {
+    border: 0;
+    font-size: 2rem;
+    background: none;
+    color: black;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+ul::scroll-button(*):hover,
+ul::scroll-button(*):focus {
+    opacity: 1;
+}
+
+ul::scroll-button(*):active {
+    translate: 1px 1px;
+}
+
+ul::scroll-button(*):disabled {
+    opacity: 0.2;
+    cursor: unset;
+}
+
+ul::scroll-button(left) {
+    content: "◄" / "Previous";
+}
+
+ul::scroll-button(right) {
+    content: "►" / "Next";
+}
+
+ul::scroll-button(*) {
+    position: absolute;
+    position-anchor: --my-carousel;
+}
+
+ul::scroll-button(left) {
+    right: calc(anchor(left) - 70px);
+    bottom: calc(anchor(top) - 180px);
+}
+
+ul::scroll-button(right) {
+    left: calc(anchor(right) - 70px);
+    bottom: calc(anchor(top) - 180px);
+}
+
+.carouselsList {
+    list-style-type: none;
+    background-color: #ff0000;
+    border: 1px solid #dddddd;
+    padding: 20px;
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+li:nth-child(even) {
+    background-color: rgb(255, 174, 0);
+}
