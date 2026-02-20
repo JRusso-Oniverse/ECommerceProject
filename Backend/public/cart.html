@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/core.css">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
+    <title>Shopping Bag</title>
+    <link rel="stylesheet" href="styles/cart.css">
+    
+
+    <style>
+        button {
+            height: 2rem;
+            border: none;
+            border-radius: 1.5rem;
+        }
+
+        .cc-price-tag {
+            &::after {
+                content: "€";
+            }
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+
+    <main>
+        <div class="cc-product-list">
+        </div>
+        <div class="cc-cart-summary">
+            <div class="cc-price-summary">
+                <div>
+                    <p>Totale carrello</p>
+                    <p id="cart-total" class="cc-price-tag"></p>
+                </div>
+
+                <div>
+                    <p>Spedizione</p>
+                    <p id="shipping-total" class="cc-price-tag"></p>
+                </div>
+
+                <div>
+                    <p>Totale</p>
+                    <p id="payment-total" class="cc-price-tag"></p>
+                </div>
+            </div>
+
+            <div class="cc-payment-options">
+                <button id="payment-button"></button>
+                <p>Oppure paga con</p>
+                <div>
+                    <button style="background-color: #222d65; color: #eeeeee;">PayPal</button>
+                    <button style="background-color: #ffa8cd; color: #0b051d;">Klarna</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+    
+    <script>
+        const mock_data = {
+            products: [
+                {
+                    id: 23,
+                    title: "Calzini",
+                    price: 2.99,
+                    count: 2
+                },
+                {
+                    id: 45,
+                    title: "Cappello",
+                    price: 12.99,
+                    count: 1
+                },
+                {
+                    id: 56,
+                    title: "T-Shirt",
+                    price: 5.99,
+                    count: 5
+                }
+            ]
+        }
+
+        function updateCart(data) {
+            renderCartList(data);
+            renderPricingInfo(data);
+        };
+
+        function renderCartList(data) {
+            mock_data.products.forEach(product => {
+                let cardElement = document.createElement("div");
+
+                cardElement.innerHTML = `
+                    <img src="./cdn/images/product-${product.id}.png"/>
+                    <div>
+                        <h2>${product.title}</h2>
+                        <p><span class="cc-price-tag">${product.price}</span> /pc</p>
+                        <div>
+                            <button>&lt;</button>
+                            <p>${product.count}</p>
+                            <button>&gt;</button>   
+                        </div>
+                    </div>
+                `;
+
+                cardElement.dataset.productId = product.id.toString();
+
+                document.querySelector("div.cc-product-list").appendChild(cardElement);
+            });
+        }
+
+        /**
+         *@param {{products: {id: number, title: string, price: number, count: number}[]}} data
+         */
+        function renderPricingInfo(data) {
+            const shippingPrice = 2.49;
+
+            let cartPrice = data.products.map(cartItem => cartItem.price * cartItem.count).reduce((cartTotal, cartItemPrice) => cartTotal + cartItemPrice);
+
+            document.getElementById("cart-total").innerText = cartPrice;
+            document.getElementById("shipping-total").innerText = shippingPrice;
+            document.getElementById("payment-total").innerText = (cartPrice + shippingPrice).toFixed(2);
+            document.getElementById("payment-button").innerText = (cartPrice + shippingPrice).toFixed(2) + "€ - Procedi all'acquisto";
+        }
+
+        updateCart(mock_data);
+
+        /**
+         *@returns {{id: number, count: number}[]}
+         */
+        function getCartFromLocalStorage() {
+            const cartData = window.localStorage.getItem("cart");
+            if (cartData === null) return [];
+            return JSON.parse(cartData);
+        }
+        
+    </script>
+</body>
+</html>

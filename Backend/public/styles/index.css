@@ -1,26 +1,5 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: auto 1fr auto;
-    gap: 1rem;
-    grid-template-areas:
-        "header header header"
-        ". main ."
-        "footer footer footer";
-    border: solid red 3px;
-}
-
-.headerECommerce {
-    grid-area: header;
+header {
     background-color: white;
-    border: solid black 1px;
-    /* position: fixed; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -49,9 +28,8 @@ body {
     grid-area: main;
 }
 
-.footerECommercee {
-    grid-area: footer;
-    border: solid darkblue 5px;
+footer {
+    color: white;
     display: flex;
     justify-content: space-evenly;
 }
