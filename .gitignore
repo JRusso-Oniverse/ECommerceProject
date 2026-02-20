@@ -1,6 +1,3 @@
+.vscode/
 node_modules/
-<<<<<<< Updated upstream
-=======
-*/[Bb]in/
->>>>>>> Stashed changes
 .env
