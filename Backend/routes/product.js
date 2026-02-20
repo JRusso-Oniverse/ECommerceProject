@@ -129,4 +129,16 @@ router.patch('/:id', async function (req, res) {
 		.json(data);
 })
 
+// DELETE /product/{id} =>
+router.delete('/:id', async function (req, res) {
+	await supabase
+		.from('products')
+		.delete()
+		.eq("id", req.params.id)
+		.select();
+	res
+		.status(204)
+		.send();
+})
+
 module.exports = router;
