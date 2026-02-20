@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: system-ui;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui;
+
+    width: 100vw;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 70vw 1fr;
+    grid-template-areas:
+        "header header header"
+        ". main ."
+        "footer footer footer";
+}
+
+header {
+    grid-area: header;
+    background-color: orangered;
+    height: 4rem;
+}
+
+main {
+    grid-area: main;
+    
+    margin: 1rem 0;
+
+    display: grid;
+    gap: 1rem;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #333333;
+    height: 2rem;
+}
