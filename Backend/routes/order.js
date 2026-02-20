@@ -5,7 +5,6 @@ var router = express.Router();
 
 const supabase = supa.createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-
 //ORDERS entity: id(PK), user_id(FK), product_id(FK), count
 
 
@@ -35,7 +34,6 @@ router.get('/:id', async function (req, res, next) {
 
 	res.json(data);
 });
-
 
 
 
@@ -88,6 +86,73 @@ router.post('/', async function (req, res) {
 		.json(data);
 	return;
 });
+
+
+
+//put orders
+router.put('/:id', async function (req, res) {
+	const newOrder = {
+		id: req.params.id,
+		user_id: req.body.user_id,
+		product_id: req.body.product_id,
+		count: req.body.count
+	};
+	if (newOrder.product_id === undefined) {
+		res
+			.status(400)
+			.json({ "errorMessage": "no product" });
+	}
+
+	const { data, error } = await supabase
+		.from('orders')
+		.update(newOrder)
+		.eq("id", req.params.id)
+		.select();
+	if (error !== null) {
+		res
+			.status(500)
+			.json(
+				{
+					"errorMessage": "Server error",
+					"details": error.details
+				}
+			)
+		return;
+	}
+	res
+		.status(200)
+		.location(`/order/${data[0].id}`)
+		.json(data);
+});
+
+
+
+//patch orders
+router.patch('/:id', async function (req, res) {
+	const diffs = {};
+	if (req.body.product_id !== undefined) diffs["product_id"] = req.body.product_id;
+	const { data, error } = await supabase
+		.from('orders')
+		.update(diffs)
+		.eq("id", req.params.id)
+		.select();
+	if (error !== null) {
+		res
+			.status(500)
+			.json(
+				{
+					"errorMessage": "Server error",
+					"details": error.details
+				}
+			)
+		return;
+	}
+	res
+		.status(200)
+		.location(`/order/${data[0].id}`)
+		.json(data);
+});
+
 
 
 
