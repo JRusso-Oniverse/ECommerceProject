@@ -1,4 +1,10 @@
 * {
+    --accent-color: orangered;
+    --text-dark: #222222;
+    --text-light: #eeeeee;
+    --background-dark: #222222;
+    --background-light: #eeeeee;
+
     padding: 0;
     margin: 0;
     font-family: system-ui;
@@ -20,12 +26,6 @@ body {
         "footer footer footer";
 }
 
-header {
-    grid-area: header;
-    background-color: orangered;
-    height: 4rem;
-}
-
 main {
     grid-area: main;
     
@@ -33,10 +33,4 @@ main {
 
     display: grid;
     gap: 1rem;
-}
-
-footer {
-    grid-area: footer;
-    background-color: #333333;
-    height: 2rem;
 }

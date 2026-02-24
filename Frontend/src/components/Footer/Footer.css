@@ -1,0 +1,11 @@
+footer {
+    grid-area: footer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    height: 2rem;
+}

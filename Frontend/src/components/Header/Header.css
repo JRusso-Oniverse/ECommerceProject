@@ -1,0 +1,17 @@
+header {
+    grid-area: header;
+    background-color: var(--accent-color);
+    height: 4rem;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cart {
+
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+}
